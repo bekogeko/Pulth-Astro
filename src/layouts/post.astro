@@ -12,15 +12,12 @@ const {frontmatter} = Astro.props;
 
     <title>{frontmatter.title}</title>
 </head>
+<body class="dark:text-white dark:bg-neutral-900">
 
-<body class="bg-zinc-900 text-white">
-<div>
-    <Navigation title={frontmatter.title}/>
-    <main class="max-w-screen-md mx-auto prose dark:prose-invert">
-        <slot/>
-    </main>
-</div>
+<Navigation/>
+<main class="max-w-screen-md mx-auto prose dark:prose-invert mt-24">
+    <slot/>
+</main>
 
 </body>
-
 </html>

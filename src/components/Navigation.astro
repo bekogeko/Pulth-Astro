@@ -8,14 +8,14 @@ const page = Astro.url;
 // is this the home page?
 const isHome = page.pathname === '/';
 
-// get title from props
-const title = Astro.props.title;
-const isTitleGiven = title !== undefined;
+
+// if there is an slash at the end of the url, remove it
+const pathname = page.pathname.endsWith('/') ? page.pathname.slice(0, -1) : page.pathname;
 ---
 
 <div class="flex py-2 dark:text-white justify-between max-w-screen-md mx-auto">
 
-    <span class="cursor-default text-xl tracking-wide ">{isHome ? "~/" : isTitleGiven ? title : page.pathname}</span>
+    <span class="cursor-default text-xl tracking-wide ">{isHome ? "~/" : pathname}</span>
     <a class="flex-0 group" href="/about">
         <Image
                 width="48"
