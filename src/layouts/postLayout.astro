@@ -15,7 +15,7 @@ const {frontmatter} = Astro.props;
 
 <body class="bg-zinc-900 text-white">
 <div>
-    <Navigation/>
+    <Navigation title={frontmatter.title}/>
     <main class="max-w-screen-md mx-auto prose dark:prose-invert">
         <slot/>
     </main>

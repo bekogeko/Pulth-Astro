@@ -1,0 +1,69 @@
+---
+// get every post
+const posts = await Astro.glob('./posts/*.md');
+
+// get tags
+// { tags: string, posts: PostData[] }
+const tagsCollection = posts.reduce((acc, post) => {
+    post.frontmatter.tags.forEach(tag => {
+        const existingTag = acc.find(t => t.tag === tag);
+        if (existingTag) {
+            existingTag.posts.push(post);
+        } else {
+            acc.push({tag, posts: [post]});
+        }
+    });
+    // sort acc.posts by pubDate
+    acc.forEach(tag => {
+        tag.posts.sort((a, b) => new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate));
+    });
+
+    return acc;
+}, []).sort((a, b) => b.posts.length - a.posts.length)
+
+
+import BaseLayout from '../layouts/base.astro';
+---
+
+<BaseLayout>
+    {
+        tagsCollection.map(collection =>
+                <section>
+                    <div class="">
+                        <a href=`/tags/${collection.tag}` class="text-xl hover:underline">
+                            #{collection.tag}
+                        </a>
+                        &nbsp;
+                        <span class="text-sm text-neutral-500  mr-2">
+                            {collection.posts.length} posts
+                        </span>
+                    </div>
+                    <ul class="pl-8 flex gap-y-4 flex-col py-2">
+                        <!-- get first 5 posts-->
+                        {collection.posts.slice(0, 5).map(post => (
+                                <div class="">
+                                    <h2 class="text-2xl font-bold">
+                                        <a href={post.url} class="hover:underline">{post.frontmatter.title}</a>
+                                    </h2>
+                                    <p class="text-sm text-neutral-500">{post.frontmatter.pubDate}</p>
+                                    <p>{post.frontmatter.description}</p>
+                                    <div class="flex flex-wrap">
+                                        {
+                                            // go over every tags of the post
+
+                                            post.frontmatter.tags.map(tag => (
+                                                    <a href={`/tags/${tag}`}
+                                                       class="text-sm text-neutral-500 hover:underline mr-2">#{tag}</a>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                        ))}
+                    </ul>
+                </section>
+        )
+    }
+
+    <!--<pre>{JSON.stringify(tagsCollection, null, 2)}</pre>-->
+</BaseLayout>
+

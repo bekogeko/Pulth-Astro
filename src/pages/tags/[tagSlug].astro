@@ -1,0 +1,61 @@
+---
+import Base from "../../layouts/base.astro";
+
+export async function getStaticPaths() {
+
+    // get all the markdown files in the posts dir
+    const posts = await Astro.glob('../posts/*.md');
+
+    // get every tags in the markdown files
+    // Very good example for set theory
+    const tags = new Set();
+
+    // tags are stored in the frontmatter.tags string array
+    posts.forEach((post) => {
+        post.frontmatter.tags.forEach((tag) => tags.add(tag));
+    });
+
+    return Array.from(tags).map((tag) => ({params: {tagSlug: tag}}));
+}
+
+
+const {tagSlug} = Astro.params;
+const allposts = await Astro.glob(`../posts/*.md`);
+
+// filter posts with tagSlug
+const tagsPosts = allposts.filter((post) => {
+    return post.frontmatter.tags.includes(tagSlug);
+})
+---
+
+<Base>
+    <h1 class="text-3xl mb-16">
+        Posts with <u class="underline">#{tagSlug}</u>
+    </h1>
+
+    <!--    print tagsPosts-->
+    {
+        tagsPosts.map((post) => (
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold">
+                        <a href={post.url} class="hover:underline">{post.frontmatter.title}</a>
+                    </h2>
+                    <p class="text-sm text-neutral-500">{post.frontmatter.pubDate}</p>
+                    <p>{post.frontmatter.description}</p>
+                    <div class="flex flex-wrap">
+                        {
+                            // go over every tags of the post
+
+                            post.frontmatter.tags.map(tag => (
+                                    <a href={`/tags/${tag}`}
+                                       class="text-sm text-neutral-500 hover:underline mr-2">#{tag}</a>
+                            ))
+                        }
+                    </div>
+                </div>
+        ))
+    }
+
+
+</Base>
+

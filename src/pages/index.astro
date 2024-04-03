@@ -2,6 +2,7 @@
 import Navigation from '../components/Navigation.astro';
 
 const allPosts = await Astro.glob('./posts/*.md');
+allPosts.sort((a, b) => new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate))
 
 //  {name,usageCount,slug} => {name: TagName, count: usageCount}
 const tags = allPosts
@@ -45,7 +46,7 @@ const title = 'Pulth - Bekir Gulestan';
                     <p>{post.frontmatter.description}</p>
                     <div class="flex flex-wrap">
                         {
-                            // go over every tag of the post
+                            // go over every tags of the post
 
                             post.frontmatter.tags.map(tag => (
                                     <a href={`/tags/${tag}`}
