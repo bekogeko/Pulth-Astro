@@ -17,6 +17,15 @@ const {frontmatter} = Astro.props;
 <Navigation hide="hide"/>
 <main class="max-w-screen-md mx-auto prose dark:prose-invert mt-24">
     <slot/>
+    <!--    Render tags-->
+    <div class="mt-8">
+        <ul class="flex flex-wrap gap-x-2">
+            {frontmatter.tags.map((tag) => (
+                    <a class="tracking-wide underline hover:text-neutral-900 dark:hover:text-neutral-100 text-neutral-500"
+                       href=`/tags/${tag}`>#{tag}</a>
+            ))}
+        </ul>
+    </div>
 </main>
 
 </body>
