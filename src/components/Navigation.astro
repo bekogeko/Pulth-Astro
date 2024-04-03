@@ -15,9 +15,9 @@ const isHide = !!Astro.props.hide;
 const pathname = page.pathname.endsWith('/') ? page.pathname.slice(0, -1) : page.pathname;
 ---
 
-<div class="flex py-2 text-white justify-between max-w-screen-md mx-auto">
+<div class="flex py-2 dark:text-white justify-between max-w-screen-md mx-auto">
 
-    <span class="cursor-default text-xl tracking-wide ">~{isHome ? "/" : pathname}</span>
+    <span class="cursor-default text-xl tracking-wide">~{isHome ? "/" : pathname}</span>
     <a class="flex-0 group" href="/about">
         <Image
                 width="48"
@@ -35,10 +35,10 @@ const pathname = page.pathname.endsWith('/') ? page.pathname.slice(0, -1) : page
     </a>
 </div>
 
-<nav class=`max-w-screen-md mx-auto flex gap-x-4  text-neutral-500 `>
-    <a class="tracking-wide underline hover:text-neutral-100" href="/">/home</a>
-    <a class="tracking-wide underline hover:text-neutral-100" href="/tags">/tags</a>
-    <a class="tracking-wide underline hover:text-neutral-100" href="/about">/about</a>
-    <a class="tracking-wide underline hover:text-neutral-100" href="/social">/social</a>
-    <a class="tracking-wide underline hover:text-neutral-100" href="/rss">/rss</a>
+<nav class=`max-w-screen-md mx-auto flex gap-x-4 dark:text-neutral-500 text-neutral-500 `>
+    <a class="tracking-wide underline hover:text-neutral-900 dark:hover:text-neutral-100" href="/">/home</a>
+    <a class="tracking-wide underline hover:text-neutral-900 dark:hover:text-neutral-100" href="/tags">/tags</a>
+    <a class="tracking-wide underline hover:text-neutral-900 dark:hover:text-neutral-100" href="/about">/about</a>
+    <a class="tracking-wide underline hover:text-neutral-900 dark:hover:text-neutral-100" href="/social">/social</a>
+    <a class="tracking-wide underline hover:text-neutral-900 dark:hover:text-neutral-100" href="/rss">/rss</a>
 </nav>
