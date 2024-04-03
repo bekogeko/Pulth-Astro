@@ -1,0 +1,38 @@
+---
+const avatar = "https://pbs.twimg.com/profile_images/1464307315654508548/pWsglXIu_normal.jpg";
+import {Image} from "astro:assets"
+
+// Get the current page
+const page = Astro.url;
+
+// is this the home page?
+const isHome = page.pathname === '/';
+---
+
+<div class="flex py-2 dark:text-white justify-between max-w-screen-md mx-auto">
+
+    <span class="cursor-default text-xl tracking-wide ">{isHome ? "~/" : page.pathname}</span>
+    <a class="flex-0 group" href="/about">
+        <Image
+                width="48"
+                height="48"
+                loading="eager"
+
+                src={avatar}
+
+                class="rounded-full h-8 w-8 inline"
+                alt="author's twitter profile avatar"
+        />
+        <span class="group-hover:underline">
+            by Bekir
+        </span>
+    </a>
+</div>
+
+<div class="max-w-screen-md mx-auto flex gap-x-4">
+    <a class="tracking-wide underline" href="/">/home</a>
+    <a class="tracking-wide underline" href="/tags">/tags</a>
+    <a class="tracking-wide underline" href="/about">/about</a>
+    <a class="tracking-wide underline" href="/social">/social</a>
+    <a class="tracking-wide underline" href="/rss">/rss</a>
+</div>

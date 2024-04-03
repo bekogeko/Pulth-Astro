@@ -1,0 +1,26 @@
+---
+import Navigation from "../components/Navigation.astro";
+const {frontmatter} = Astro.props;
+---
+
+<html>
+<head>
+    <link rel="icon" type="text/svg+xml" href="/favicon.svg"/>
+
+    <meta name="viewport" content="width=device-width"/>
+    <meta name="generator" content="built with Astro and curiosity"/>
+
+    <title>{frontmatter.title}</title>
+</head>
+
+<body class="bg-zinc-900 text-white">
+<div>
+    <Navigation/>
+    <main class="max-w-screen-md mx-auto prose dark:prose-invert">
+        <slot/>
+    </main>
+</div>
+
+</body>
+
+</html>

@@ -1,5 +1,23 @@
 ---
+import Navigation from '../components/Navigation.astro';
 
+const allPosts = await Astro.glob('./posts/*.md');
+
+//  {name,usageCount,slug} => {name: TagName, count: usageCount}
+const tags = allPosts
+    .flatMap(post => post.frontmatter.tags)
+    .reduce((acc, tag) => {
+        const existingTag = acc.find(t => t.name === tag);
+        if (existingTag) {
+            existingTag.count++;
+        } else {
+            acc.push({name: tag, count: 1});
+        }
+        return acc;
+    }, [])
+    .sort((a, b) => b.count - a.count);
+
+const title = 'Pulth - Bekir Gulestan';
 ---
 
 <html lang="en">
@@ -10,11 +28,38 @@
     <meta name="generator" content={Astro.generator}/>
     <title>Pulth</title>
 </head>
-<body>
+<body class="dark:text-white dark:bg-neutral-900">
 
-<a href="/">Home</a>
-<a href="/about/">About</a>
+<Navigation/>
+<div class="max-w-screen-md mx-auto mt-24">
 
-<h1>My Pulth Blog</h1>
+    {
+        // go over every post
+
+        allPosts.map(post => (
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold">
+                        <a href={post.url} class="hover:underline">{post.frontmatter.title}</a>
+                    </h2>
+                    <p class="text-sm text-neutral-500">{post.frontmatter.pubDate}</p>
+                    <p>{post.frontmatter.description}</p>
+                    <div class="flex flex-wrap">
+                        {
+                            // go over every tag of the post
+
+                            post.frontmatter.tags.map(tag => (
+                                    <a href={`/tags/${tag}`}
+                                       class="text-sm text-neutral-500 hover:underline mr-2">#{tag}</a>
+                            ))
+                        }
+                    </div>
+                </div>
+        ))
+
+
+    }
+
+</div>
+
 </body>
 </html>
