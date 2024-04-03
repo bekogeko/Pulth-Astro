@@ -15,7 +15,13 @@ const tagsCollection = posts.reduce((acc, post) => {
     });
     // sort acc.posts by pubDate
     acc.forEach(tag => {
-        tag.posts.sort((a, b) => new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate));
+        tag.posts.sort((a, b) => {
+            //  error ts(2363): The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+            // return new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate);
+
+            // convert to number
+            return +new Date(b.frontmatter.pubDate) - +new Date(a.frontmatter.pubDate);
+        });
     });
 
     return acc;
@@ -49,7 +55,7 @@ import BaseLayout from '../layouts/base.astro';
                                     <p>{post.frontmatter.description}</p>
                                     <div class="flex flex-wrap">
                                         {
-                                            // go over every tags of the post
+                                            // go over every tag of the post
 
                                             post.frontmatter.tags.map(tag => (
                                                     <a href={`/tags/${tag}`}

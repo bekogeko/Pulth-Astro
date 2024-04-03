@@ -2,7 +2,11 @@
 import Navigation from '../components/Navigation.astro';
 
 const allPosts = await Astro.glob('./posts/*.md');
-allPosts.sort((a, b) => new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate))
+allPosts.sort((a, b) => {
+    // error ts(2362): The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+    // return new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate);
+    return new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime();
+})
 
 //  {name,usageCount,slug} => {name: TagName, count: usageCount}
 const tags = allPosts

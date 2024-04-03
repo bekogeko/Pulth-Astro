@@ -1,5 +1,5 @@
 ---
-layout: "./src/layouts/postLayout.astro"
+layout: "../../layouts/post.astro"
 
 title: My Second Blog Post
 description: "After learning some Astro, I couldn't stop!"

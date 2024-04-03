@@ -1,5 +1,5 @@
 ---
-layout: './src/layouts/postLayout.astro'
+layout: '../../layouts/post.astro'
 
 title: 'My First Blog Post'
 description: 'This is the first post of my new Astro blog. Lets see how it goes!'

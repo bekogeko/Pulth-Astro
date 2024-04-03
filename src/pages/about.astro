@@ -1,22 +1,4 @@
 ---
-import Navigation from '../components/Navigation.astro';
-
-const allPosts = await Astro.glob('./posts/*.md');
-
-//  {name,usageCount,slug} => {name: TagName, count: usageCount}
-const tags = allPosts
-    .flatMap(post => post.frontmatter.tags)
-    .reduce((acc, tag) => {
-        const existingTag = acc.find(t => t.name === tag);
-        if (existingTag) {
-            existingTag.count++;
-        } else {
-            acc.push({name: tag, count: 1});
-        }
-        return acc;
-    }, [])
-    .sort((a, b) => b.count - a.count);
-
 const pageTitle = "About";
 
 const identity = {
