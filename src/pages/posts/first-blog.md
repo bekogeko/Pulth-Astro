@@ -23,3 +23,7 @@ tags: [ "blog","astro","Pulth" ]
 - [x] Added a About page
 
 ## What's next
+
+#### Special thanks to
+
+- ttnetdc.net
