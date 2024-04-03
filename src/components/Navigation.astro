@@ -15,7 +15,7 @@ const isHide = !!Astro.props.hide;
 const pathname = page.pathname.endsWith('/') ? page.pathname.slice(0, -1) : page.pathname;
 ---
 
-<div class="flex py-2 dark:text-white justify-between max-w-screen-md mx-auto">
+<div class="flex py-2 text-white justify-between max-w-screen-md mx-auto">
 
     <span class="cursor-default text-xl tracking-wide ">~{isHome ? "/" : pathname}</span>
     <a class="flex-0 group" href="/about">
