@@ -11,6 +11,9 @@ const {frontmatter} = Astro.props;
     <meta name="generator" content="built with Astro and curiosity"/>
 
     <title>{frontmatter.title}</title>
+    <meta name="description" content={frontmatter.description}/>
+    <meta name="author" content="Bekir Gulestan"/>
+    <meta name="tags" content={frontmatter.tags.join(", ")}>
 </head>
 <body class="dark:text-white dark:bg-neutral-900">
 
