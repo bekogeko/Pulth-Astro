@@ -2,5 +2,5 @@
 
 export default {
   content: ["./src/**/*.{astro,js,jsx,ts,tsx}"],
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [import("@tailwindcss/typography")],
 };
