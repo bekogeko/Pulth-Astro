@@ -7,13 +7,30 @@ const {frontmatter} = Astro.props;
 <head>
     <link rel="icon" type="text/svg+xml" href="/favicon.svg"/>
 
-    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="generator" content="built with Astro and curiosity"/>
+
 
     <title>{frontmatter.title}</title>
     <meta name="description" content={frontmatter.description}/>
     <meta name="author" content="Bekir Gulestan"/>
-    <meta name="tags" content={frontmatter.tags.join(", ")}>
+    <meta name="tags" content={frontmatter.tags.join(", ")}/>
+    <meta name="robots" content="index, follow"/>
+
+
+    <meta property="og:title" content={frontmatter.title}/>
+    <meta property="og:description" content={frontmatter.description}/>
+    <meta property="og:type" content="article"/>
+
+
+
+
+    <!-- publish date -->
+    <meta property="article:published_time" content={(new Date(frontmatter.pubDate)).toString()} />
+    <!-- last update/edit date -->
+    <meta property="article:modified_time" content={(new Date(frontmatter.lastModified)).toString()} />
+
+
 </head>
 <body class="dark:text-white dark:bg-neutral-900">
 
