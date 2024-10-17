@@ -19,7 +19,9 @@ const pathname = page.pathname.replace(/%20/g,"-");
 
 <div class="flex py-2 dark:text-white justify-between max-w-screen-md mx-auto">
 
-    <span class="cursor-default text-xl tracking-wide">~{isHome ? "/" : pathname}</span>
+    <span class="cursor-default text-xl tracking-wide">
+        ~{isHome ? "/" : pathname}
+    </span>
     <a class="flex-0 group" href="/about">
         <Image
                 width="48"

@@ -5,7 +5,7 @@ title: 'My First Blog Post'
 description: 'This is the first post of my new Astro blog. Lets see how it goes!'
 
 pubDate: 'April 3, 2024'
-lastEdited: 'April 3, 2024'
+lastModified: 'April 3, 2024'
 tags: [ "blog","astro","Pulth" ]
 ---
 
